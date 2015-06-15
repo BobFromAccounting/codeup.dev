@@ -1,0 +1,68 @@
+body {
+	position: absolute;
+    background: url("/img/lightspectrum.jpeg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: Helvetica, Verdana, Sans-Serif;
+}
+/*Formatting for background image*/
+
+h1 a:visited {
+	color: red;
+}
+
+a:hover {
+	color: skyblue;
+}
+
+a:visited {
+	color:black;
+}
+
+div	{
+	width: 150px;
+	height: 50px;
+	border: 1px solid black;
+	border-radius: 90px;
+	padding-top: 0px;
+	padding-right: 10px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	color: white;
+	margin-bottom: 10px;
+}
+
+div.box1 {
+	background-color: red;
+}
+
+div.box2 {
+	background-color: orange;
+	margin-left: 30px;
+}
+
+div.box3 {
+	background-color: yellow;
+	margin-left: 60px
+}	
+
+div.box4 {
+	background-color: green;
+	margin-left: 90px
+}
+
+div.box5 {
+	background-color: blue;
+	margin-left: 120px
+}
+
+div.box6 {
+	background-color: violet;
+	margin-left: 150px
+}

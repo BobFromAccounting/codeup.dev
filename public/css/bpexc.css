@@ -1,0 +1,58 @@
+body {
+	position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    background: url("/img/SDP81.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    color: white;
+	font-family: Helvetica, Verdana, Sans-Serif;
+}
+
+h1 {
+	color: skyblue;
+
+}
+
+h2 {
+	color: skyblue;
+	text-decoration: underline;
+}
+
+ol {
+	list-style: upper-roman;
+}
+
+ul {
+	list-style: lower-roman;
+}
+
+td {
+	padding: 1, 1, 1, 1;
+	font-size: .8rem;
+	font-family: Helvetica, Verdana, Sans-Serif;
+	color: orange;
+}
+
+tr {
+	padding: 1, 1, 1, 1;
+	font-size: 1.2rem;
+	color: purple;
+}
+
+a:link {
+	color: blue;
+}
+
+a:hover {
+	color: white;
+}
+
+a:visited {
+	color: purple;
+}
