@@ -6,21 +6,21 @@ var color = colors[Math.floor(Math.random()*colors.length)];
 var favorite = 'red'; // TODO: change this to your favorite color from the list
 
 // TODO: Create a block of if/else statements to check for every color except indigo and violet.
-if (colors === 'red'){
-	console.log('Red is the color of blood.')
-} else if (colors === 'orange') {
-	console.log('Orange is the color of the fire.')
-} else if (colors === 'yellow') {
-	console.log('Yellow is the color of sunflower petals.')
-} else if (colors === 'green') {
-	console.log('Green is the color of grassy plains.')
-} else if (colors === 'blue') {
-	console.log('Blue is the color of the sky.')
+if (color === 'red') {
+	console.log('Red is the color of blood.');
+} else if (color === 'orange') {
+	console.log('Orange is the color of autumn.');
+} else if (color === 'yellow') {
+	console.log('Yellow is the color of your energy.');
+} else if (color === 'green') {
+	console.log('Green is the color of grassy plains.');
+} else if (color === 'blue') {
+	console.log('Blue is the color of the sky.');
 } else {
-	console.log('I do not know anything by that color.')
+	console.log('I do not know anything by that color.');
 } 
 
-var color = (favorite) ? "This is my favorite color!" : "This is not my favorite color!"
+var color = (favorite) ? "This is my favorite color!" : "This is not my favorite color!";
 
 
 // TODO: When a color is encountered log a message that tells the color, and an object of that color.
