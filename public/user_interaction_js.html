@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Interaction JS</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var myName;
+		console.log(myName);
+
+		do {
+			myName = prompt('What is your name?');
+		} while (!myName)
+
+		alert('Greetings, ' + myName);
+
+		var pizza = confirm('Do you like pizza?');
+
+		if (pizza) {
+			alert('You are awesome!')
+		} else {
+			alert('WHHATT?!??! Think about this again, I think you might have misheard.')
+			do {
+				pizza = confirm('I asked if you like pizza?')
+			} while (!pizza)
+		}
+		
+	</script>
+</body>
+</html>
