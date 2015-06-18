@@ -7,13 +7,17 @@
 	<script type="text/javascript">
 		"Use strict";
 
-		var fullName = ['Tarek', 'Dina', 'Carlos', 'Chalupa'];
+		(function () {
+			var bands = ['Firs', 'Pomegranates', 'Beach House', 'Bonobo', 'Local Natives', 'Sithu Aye', 'Aes Dana', 'Carbon Based Lifeforms'];
 
-		console.log(fullName.length);
-		console.log('My name is ' + fullName[0]);
-		console.log("My sister's name is " + fullName[1]);
-		console.log("My brother's name is " + fullName[2]);
-		console.log("My puppies name is " + fullName[3]);
+			for (var i = 0; i < bands.length; i++) {
+				console.log('My Favorite bands are ranked: ' + (i + 1) + ")" + bands[i]);
+			}
+
+			bands.forEach(function (element, index, array) {
+				console.log('my Favorite bands are ranked: ' + (index + 1) + ')' + element);
+			});
+		})();
 
 // todo:
 // Create an array of 4 names using literal array notation, in a variable called 'names'.
