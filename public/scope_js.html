@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Scope JS</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		'use strict';
+
+		var myNameIs = 'Tarek';
+
+		function sayHello(name) {
+			console.log('Hello, ' + name);
+		}
+
+		sayHello(myNameIs);
+
+		var random = Math.floor((Math.random()*100)+1);
+
+		function isOdd(number) {
+			var message = (number % 2 == 0) ? number + " This is an even number." : number + " This is an odd number.";
+			console.log(message);
+		}
+
+		isOdd(random);
+		// todo:
+		// Create a function called 'isOdd' that takes a number as a parameter.
+		// The function should use the ternary operator to log a message.
+		// The log should tell the number passed in and whether it is odd or not.
+
+		// todo: Call the function 'isOdd' passing the variable 'random' as a parameter.
+	</script>
+
+</body>
+</html>
