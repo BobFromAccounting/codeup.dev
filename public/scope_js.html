@@ -10,23 +10,22 @@
 		'use strict';
 
 		(function () {
-		var myNameIs = 'Tarek';
+			function sayHello(name) {
+				return 'Hello, ' + name;
+			}
 
-		function sayHello(name) {
-			console.log('Hello, ' + name);
-		}
+			function isOdd(number) {
+				var message = (number % 2 == 0) ? number + " This is an even number." : number + " This is an odd number.";
+				return message;
+			}
 
-		sayHello(myNameIs);
+			var myNameIs = 'Tarek';
+			var random = Math.floor((Math.random()*100)+1);
 
-		var random = Math.floor((Math.random()*100)+1);
+	 		sayHello(myNameIs);
 
-		function isOdd(number) {
-			var message = (number % 2 == 0) ? number + " This is an even number." : number + " This is an odd number.";
-			console.log(message);
-		}
-
-		isOdd(random);
-
+			isOdd(random);
+			console.log(isOdd(random));
 		})();
 		// todo:
 		// Create a function called 'isOdd' that takes a number as a parameter.
