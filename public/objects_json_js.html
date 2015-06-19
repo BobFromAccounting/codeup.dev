@@ -8,31 +8,31 @@
 		"use strict";
 		(function () {
 			var books = [{
-				book: "Dune",
+				title: "Dune",
 				author: {
 					firstName: "Frank",
 					lastName: "Herbert",
 				}
 			}, {
-				book: "Metamorphosis",
+				title: "Metamorphosis",
 				author: { 
 					firstName: "Franz",
 					lastName: "Kafka",
 				}
 			}, {
-				book: "Ecce Homo",
+				title: "Ecce Homo",
 				author: {
 					firstName: "Fredrich",
 					lastName: "Neitzsche",
 				}
 			}, {
-				book: "The Stranger",
+				title: "The Stranger",
 				author: {
 					firstName: "Albert",
 					lastName: "Camus",
 				}
 			}, {
-				book: "Ham on Rye",
+				title: "Ham on Rye",
 				author: {
 					firstName: "Charles",
 					lastName: "Bukowski",
@@ -51,14 +51,14 @@
 			// Loop through the array of books using .forEach and print out the specified information about each one.
 			// start loop here
 			books.forEach(function (element, index, array) {
-			    console.log("Book #" + (index + 1));
-			    console.log(element.book);
+			    console.log("Book #" + index);
+			    console.log("Title: " + element.title);
 			    console.log("Author: " + element.author.firstName + " " + element.author.lastName);
 			    console.log("---");
 			});
 			// end loop here
 
-		})();
+			})();
 	</script>
 </body>
 </html>
