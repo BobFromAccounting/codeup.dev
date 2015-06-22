@@ -7,6 +7,8 @@
 
     <body>
         <h1 id="main-header">Hello World!</h1>
+        <button id="btn1">Click Me</button>
+        
         <ul>
             <li data-dbid="1">Item 1</li>
             <li data-dbid="2">Item 2</li>
@@ -14,7 +16,10 @@
             <li data-dbid="4">Item 4</li>
             <li data-dbid="5">Item 5</li>
         </ul>
+        <button id="btn2">Click Me!</button>
+
         <h2 id="sub-header">Hello Again.</h2>
+        <button id="btn3">Click Me!!!</button>
         <p class="sub-paragraph">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -24,37 +29,43 @@
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
         </p>
+        <button id="btn4">CLICK MEEE!!!!</button>
 
         <script>
             "use strict";
             (function() {
-                // TODO: Uncomment next line and get the main header element by id
-                var mainHeader = document.getElementById("main-header");
+                var listenbtn1 = function (event) {
+                    var mainHeader = document.getElementById("main-header");
+                    mainHeader.innerHTML = "JavaScript is cool";
+                }
+                document.getElementById("btn1").addEventListener('click', listenbtn1, false);
 
-                // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-                console.log(mainHeader.innerHTML = "JavaScript is cool");
-                // TODO: Uncomment the next line and get the sub header element by id
-                var subHeader = document.getElementById("sub-header");
 
-                // TODO: Set the text color of subHeader to blue
-                console.log(subHeader.style.color = '#00F');
-                // TODO: Uncomment the next line and get all list items
-                var listItems = document.getElementsByTagName('li'); 
+                var listenbtn3 = function (event) {
+                    var subHeader = document.getElementById("sub-header");
+                    subHeader.style.color = '#00F';
+                }
+                document.getElementById("btn3").addEventListener('click', listenbtn3, false);
 
-                // TODO: Set text color on every other list item to grey
-                // TODO: Set text color of li with dbid = 1 to blue
-                for (var i = 0; i < listItems.length; i++) {
-                    if (i % 2 == 1) {
-                        console.log(listItems[i].style.color = '#d3d3d3');
-                    } else if (listItems[i].getAttribute("data-dbid") == "1") {
-                        console.log(listItems[i].style.color = '#00F');
+              
+                var listenbtn2 = function (event) {
+                    var listItems = document.getElementsByTagName('li'); 
+                    for (var i = 0; i < listItems.length; i++) {
+                        if (i % 2 == 1) {
+                            console.log(listItems[i].style.color = '#d3d3d3');
+                        } else if (listItems[i].getAttribute("data-dbid") == "1") {
+                            console.log(listItems[i].style.color = '#00F');
+                        }
                     }
                 }
-
-                // TODO: Uncomment the next line and get all elements with class name sub-paragraph
-                var subParagraphs = document.getElementsByClassName('sub-paragraph');
+                document.getElementById("btn2").addEventListener('click', listenbtn2, false);
                 
-                subParagraphs[0].innerHTML = 'Mission Accomplished!'
+
+                var listenbtn4 = function (event) {
+                    var subParagraphs = document.getElementsByClassName('sub-paragraph');
+                    subParagraphs[0].innerHTML = 'Mission Accomplished!';
+                }
+                document.getElementById("btn4").addEventListener('click', listenbtn4, false);
 
                 // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
             })();
