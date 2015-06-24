@@ -33,7 +33,7 @@ function operatorClick () {
 
 // This is a clear function that resets the values of my inputs back to null.
 
-var clear = function () {
+function clear () {
 	document.getElementById("initialdisplay").value = "";
 	document.getElementById("secondaryinput").value = "";
 	document.getElementById("operator").value = "";
@@ -45,7 +45,7 @@ document.getElementById("clear").addEventListener('click', clear, false);
 // clear the secondary input value, while entering the resultant value into the primary input field, leaving
 // operator value in place, allowing you to then increment with a new secondary operand value.
 
-var equals = function () {
+function equals () {
 	var inputOne = document.getElementById("initialdisplay").value;
 	var inputTwo = document.getElementById("secondaryinput").value;
 	var evaluate = (parseFloat(inputOne) + parseFloat(inputTwo));
