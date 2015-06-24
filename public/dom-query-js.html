@@ -52,9 +52,9 @@
                     var listItems = document.getElementsByTagName('li'); 
                     for (var i = 0; i < listItems.length; i++) {
                         if (i % 2 == 1) {
-                            console.log(listItems[i].style.color = '#d3d3d3');
+                            listItems[i].style.color = '#d3d3d3';
                         } else if (listItems[i].getAttribute("data-dbid") == "1") {
-                            console.log(listItems[i].style.color = '#00F');
+                            listItems[i].style.color = '#00F';
                         }
                     }
                 }
@@ -66,8 +66,6 @@
                     subParagraphs[0].innerHTML = 'Mission Accomplished!';
                 }
                 document.getElementById("subParagraphBtn").addEventListener('click', listenSubParagraphBtn, false);
-
-                // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
             })();
         </script>
     </body>
