@@ -14,6 +14,9 @@
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANQEK6nmErpxkqSDcRMxJ62PfiOsD7tZk"></script>
 	<script type="text/javascript">
+		"use strict";
+		// commented out geocoding syntax for the api. Changed to use strict lat/lng. Working if rebuild of 
+		// function.
 		// Initial address for geocoder set to a variable - address -
 		// var address = '310 Colorado St, Austin, TX 78701';
 
@@ -24,7 +27,7 @@
 		// 	if (status == google.maps.GeocoderStatus.OK) {
 		var mapOptions = {
 
-			zoom: 20,
+			zoom: 11,
 			
 			center: { lat: 30.266296, lng: -97.745133 },
 			
@@ -36,11 +39,17 @@
 		// 	}
 		// });
 		var imperia = { lat: 30.266296, lng: -97.745133 };
-		
+		var hopdoddy = { lat: 30.3576535, lng: -97.7673988 };
+
 		var marker = new google.maps.Marker({
 			position: imperia,
-			map: map
+			map: map,
 		});
+			
+		var marker2 = new google.maps.Marker({
+			position: hopdoddy,
+			map: map			
+		});	
 
 		var infowindow = new google.maps.InfoWindow({
         	content: 'Imperia Restaurant!'
