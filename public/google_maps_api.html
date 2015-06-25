@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Google Maps API</title>
+	<style type="text/css">
+	#map-canvas {
+		width: 320px;
+		height: 480px;
+  	}
+  	</style>
+</head>
+<body>
+	<div id="map-canvas"></div>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANQEK6nmErpxkqSDcRMxJ62PfiOsD7tZk"></script>
+	<script type="text/javascript">
+		// Initial address for geocoder set to a variable - address -
+		// var address = '310 Colorado St, Austin, TX 78701';
+
+		// //  initializing geocoder
+		// var geocoder = new google.maps.Geocoder();
+
+		// geocoder.geocode( { 'address': address}, function (results, status) {
+		// 	if (status == google.maps.GeocoderStatus.OK) {
+		var mapOptions = {
+
+			zoom: 20,
+			
+			center: { lat: 30.266296, lng: -97.745133 },
+			
+			mapTypeId: google.maps.MapTypeId.HYBRID
+		}
+		var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+		// 	} else {
+		// 		alert("Oh, SNAP! Geocoding was unsuccessful - STATUS: " + status);
+		// 	}
+		// });
+		var imperia = { lat: 30.266296, lng: -97.745133 };
+		
+		var marker = new google.maps.Marker({
+			position: imperia,
+			map: map
+		});
+
+		var infowindow = new google.maps.InfoWindow({
+        	content: 'Imperia Restaurant!'
+    	});
+
+    	infowindow.open(map,marker);
+		
+	</script>
+
+</body>
+</html>
