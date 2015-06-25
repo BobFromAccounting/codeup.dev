@@ -5,11 +5,26 @@
 </head>
 <body>
 	<h1>JQuery Exercises</h1>
-
+		
+	<h2 class="codeup">Example Page</h2>
+    
+    <div class="important">
+        <h3 id="codeup">NOTICE</h3>
+        <p class="codeup">This is an important message!</p>
+    </div>
+    <div class="not-important">
+        <h2>Lorem Ipsum</h2>
+        <p class="codeup">Lorem ipsum dolor sit amet, incididunt ut <span class="important">labore et dolore magna aliqua.</span>, quis ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <p class="important">This is also very important.</p>
 	<script src="/js/jquery.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function () {
-			alert( 'The DOM has finished loading!' );
+		"use strict";
+		$(document).ready(function() {
+			$(".codeup").css({
+				"border": "1px solid black",
+				"background-color": "rgb(200, 100, 175)"
+			});
 		});
 	</script>
 </body>
