@@ -42,8 +42,30 @@
 	<script type="text/javascript">
 		"use strict";
 		$(document).ready(function() {
-			$("li").css("font-size", "20px");
-			$("h1, p, li").css("color", "rgb(250, 0, 100)");
+
+			$("h1").click(function() {
+				$(this).css("background-color", "blue");
+				if ($("h1").css("background-color", "blue")) {
+					$("h1").click(function () {
+						$(this).css("background-color", "white");
+					});
+				}
+			});
+
+			$("p").dblclick(function() {
+				$(this).css("font-size", "19px");
+				if ($("p").css("font-size", "19px")) {
+					$(this).dblclick(function() {
+						$(this).css("font-size", "16px");
+					});
+				}
+			});
+
+			$("li").hover(function() {
+				$(this).css("color", "red");
+			}, function() {
+				$(this).css("color", "black");
+			});
 		});
 	</script>
 </body>
