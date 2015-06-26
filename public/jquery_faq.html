@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQuery FAQS</title>
+	<style type="text/css">
+	.invisible {
+		display:  	none;
+	}
+	</style>
+</head>
+<body>
+	<div>
+		<h1>National Parks FAQ</h1>
+		<dl>
+		    <dt>Q. Where do the National Parks come from?</dt>
+		    <dd>A. Storks.</dd>
+		    <dt>Q. Why am I not aware of many National Parks in my area?</dt>
+		    <dd>A. Because Dinosaurs ate them all.</dd>
+		    <dt>Q. Was Jurassic Park a real place?</dt>
+		    <dd>A. Yeah, the Dinosaurs were cool or whatev's...but the jello kinda sucks. 3 stars.</dd>
+		    <dt>Q. When was Yellowstone National Park created?</dt>
+		    <dd>A. Around the same time as the Yogi Bear cartoon.</dd>
+		    <dt>Q. Are there any National Parks that serve Fro-Yo?</dt>
+		    <dd>A. No! But you have now identified yourself as "one of them," and will now be taken to your nearest re-education center.</dd>
+		    <dt>Q. What kind of bug sprays are necessary when camping in a National Park?</dt>
+		    <dd>A. I suggest you use cyanide in the form of Orange Peels. First take an orange rhyne. Then squeeze zest directly into eyes. Then. Go camping. You're welcome!</dd>
+		    <dt>Q. What kind of bug bite is this?</dt>
+		    <dd>A. Please stop submitting these pictures. It was funny at first, but now it is getting pretty gross, and absolutely none of the staff are Medical Professionals.</dd>
+		    <dt>Q. Can I have amazon prime deliver pizza to me in a National Park?</dt>
+		    <dd>A. Yes, but only in California, and this will mean that the robots will better understand the layout of Earth's rare natural hiding places where everything is boring and beautiful. Stop the robo-pocalypse!</dd>
+		    <dt>Q. I am a ham sandwich. Have you seen me lately?</dt>
+		    <dd>A. Please do not leave food unattended in National Parks; Otherwise, Jerry will find and devour any left-overs not already placed into containers.</dd>
+		    <dt>Q. Does this fanny-pack make me look too much like a German Tourist?</dt>
+		    <dd>A. Sprechen sie deutsch?</dd>
+		</dl>
+		<a href=# id="shading">Click to toggle visibility.</a>
+	</div>
+	<aside>
+		<h1>Parks List</h1>
+	    <h3>National Parks</h3>
+	    <ul id="national-parks">
+	        <li>Arches</li>
+	        <li>Badlands</li>
+	        <li>Carlsbad Caverns</li>
+	        <li>Denali</li>
+	        <li>Everglades</li>
+	    </ul>
+	    <h3>State Parks of Texas</h3>
+	    <ul id="state-parks-texas">
+	        <li>Abilene</li>
+	        <li>Big Bend</li>
+	        <li>Choke Canyon</li>
+	        <li>Davis Mountains</li>
+	        <li>Enchanted Rock</li>
+	    </ul>
+	   	<h3>State Parks of Texas</h3>
+	    <ul id="state-parks-texas">
+	        <li>Abilene</li>
+	        <li>Big Bend</li>
+	        <li>Choke Canyon</li>
+	        <li>Davis Mountains</li>
+	        <li>Enchanted Rock</li>
+	    </ul>
+	</aside>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript">
+		"use strict";
+		$(document).ready(function () {
+			$("dd").addClass("invisible answer");
+			$('#shading').click(function(event) {
+                event.preventDefault();
+                $('.answer').toggleClass('invisible');
+            });
+            $("aside").children("ul").each(function () {
+            	$(this).children().first().css("font-weight", "bold");
+            });
+            $("li").click(function (e) {
+            	e.preventDefault();
+            	$(this).parent().toggleClass('invisible');
+            })
+		});
+	</script>
+</body>
+</html>
