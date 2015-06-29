@@ -27,7 +27,11 @@
     <p>
         <button id="btn-move">Move It</button>
 
-        <button id="btn-scale-down">Scale It</button>
+        <button id="btn-move-back">Move It Back</button>
+
+        <button id="btn-scale-up">Scale It Up</button>
+
+        <button id="btn-scale-down">Scale It Down</button>
 
         <button id="btn-disappear">Disappear It</button>
 
@@ -51,9 +55,19 @@
                         left: "+=100"
                     }, 1000)
                 });
-                $("#btn-scale-down").click(function () {
+                $("#btn-move-back").click(function () {
+                    $("#animate-box").animate({
+                        left: "-=100"
+                    }, 1000)
+                });
+                $("#btn-scale-up").click(function () {
                     $("#animate-box").animate({
                         width: "+=50%"
+                    }, 500)
+                });
+                $("#btn-scale-down").click(function () {
+                    $("#animate-box").animate({
+                        width: "-=50%"
                     }, 500)
                 });
                 $("#btn-disappear").click(function () {
@@ -69,6 +83,7 @@
                 $("#btn-all").click(function () {
                     $("#animate-box")
                     .animate({ left: "+=100" }, 250 )
+                    .animate({ left: "-=100" }, 500 )
                     .animate({ width: "+=50%" }, 500 )
                     .animate({ opacity: 0 }, 500 )
                     .animate({ opacity: 1 }, 1500 );
