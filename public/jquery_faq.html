@@ -67,19 +67,15 @@
 		"use strict";
 		$(document).ready(function () {
 			$('#shading').click(function (e) {
-                $('.toggle').toggle();
+                $('.toggle').fadeToggle();
             });
 
             $("aside").children("ul").each(function () {
             	$(this).children().first().css("font-weight", "bold");
             });
-
-            $("li").click(function (e) {
-            	$("ul").hide();
-            });
             
             $("h3").click(function (e) {
-				$("ul").show();
+				$("ul").fadeToggle();
 			});
 
 		});
