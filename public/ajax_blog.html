@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="blog">
+        <meta name="author" content="Tarek S Hafez">
+        <title>My Ajax Blog Exercise</title>
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/css/carousel.css">
+    </head>
+<body>
+	<div="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <p class="navbar-brand">Tarek S Hafez Blog</p>
+                    </div>
+                    <div id="navbar-brand" class="navbar-collapse collapse">
+                        <form class="navbar-form navbar-right">
+                            <div class="form-group">
+                                <label for="form-control" class="sr-only">Email</label>
+                                <input type="text" placeholder="Email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-control" class="sr-only">Password</label>
+                                <input type="password" placeholder="Password" class="form-control"></input>
+                            </div>
+                            <button type="submit" class="btn btn-success">Sign In</button>
+                        </form>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+    	<div class="row">
+			<div class="col-md-6">
+				<h1>Title</h1>
+				<article class="posts">
+					<div id="posts"></div>
+				</article>
+			</div>
+			<div class="well col-md-6">
+				<h1></h1>
+				<!-- // inputs should go here -->
+			</div>
+		</div>
+	</div>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+	    (function () {
+	    	"use strict";
+			var posts = [];
+
+    		var ajaxRequest = $.get('/data/blog.json');
+
+			var addPost = function (object) { 
+				posts.push(object);
+				var populateBlog = "<hr class='featurette-divider'>"
+		    					+ "<div class='row featurette'>" + "<div class='col-md-7'>"
+		    					+ "<h2 class='featurette-heading'>" + object.title + "</h2>"
+		    					+ "<p class='lead'>" + object.content + "</p>"
+		    					+ "<p>" + object.categories.join(", ") + "</p>"
+		    					+ "<p>" + object.date + "</p>"
+		    					+ "</div> <div class='col-md-5'> </div> </div>";
+		    	$("#posts").append(populateBlog);
+			}
+
+	    	$(document).ready(function () {
+		    	function loadBlogPosts () {	
+		    		ajaxRequest.always(function () {
+		    			console.log("Request Sent");
+		    		});
+		    		
+		    		ajaxRequest.fail(function (data, error) {
+		    			console.log(error);
+		    			console.log(ajaxRequest.statusText);
+		    			console.log(ajaxRequest.status);
+		    		});
+		    		
+		    		ajaxRequest.done(function (data, error) {
+		    			data.forEach(function (object, index, array) {
+			    			addPost(object);
+		    			});
+		    		});
+		    	}
+
+		    	loadBlogPosts();
+	    	});
+
+	    })();
+    </script>
+</body>
+</html>
+<!-- 
+(function () {
+	"use strict";
+
+	var addPost = function (post) {
+	// add post object to global posts array
+	//append post data to the page
+	};
+
+	var removePost = function (index) {
+	// find post in array by index
+	// splice post out of the array
+	// remove post element from page
+	};
+
+	var posts = [];
+
+	$(document).ready(function () {
+		// load post data from JSON
+		// loop over posts from json file
+		// use addPost() to handle post data
+
+		// attach event listener for new post form
+		// attach event listener for remove post button
+	});
+})(); -->

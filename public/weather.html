@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="weather forcasting">
+    <meta name="author" content="Tarek S Hafez">
+	<title>Weather API Example</title>
+	<link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Weather Application</h1>
+		<div class="row">
+			<h3>Austin, Tx</h3>
+		</div>
+	</div>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="/js/moment.js"></script>
+	<script type="text/javascript">
+	(function () {
+		"use strict";
+
+		var ajaxRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+			APPID: "d1ab172daa752ce8322b5e76f33063f5",
+			q:     "Austin, Tx",
+			units: "imperial"
+		});
+
+		var postWeatherData = function (object) {
+			console.log(object.dt)
+			console.log(moment(object.dt));
+			console.log(moment.unix(object.dt));
+
+			var day = moment.unix(object.dt);
+
+			var populateForecast = "<div class='col-md-2'>" + "<p>Date: "
+								 + day.format("ddd") + "</p> <p>Max Temp: " 
+								 + object.temp.max + "</p> <p>Min Temp: "
+								 + object.temp.min + "</p> <p>Expected Conditions: "
+								 + object.weather[0].main + "</p> <p>Rain: "
+								 + object.rain + "</p> <p> Humidity: "
+								 + object.humidity + "</p> <p>Pressure: "
+								 + object.pressure + "</p> <p>Wind Speed: "
+								 + object.speed + "</p></div>";
+
+			$(".row").append(populateForecast);
+		
+
+		}
+
+		function loadWeatherData () {
+
+			ajaxRequest.always(function () {
+				console.log("request sent");
+			});
+
+			ajaxRequest.fail(function (data, error) {
+				console.log(error);
+				console.log(ajaxRequest.status);
+			});
+
+			ajaxRequest.done(function (data) {
+				// console.log(data);
+				console.log(data);
+				for (var i = 0; i < data.list.length; i++) {
+					postWeatherData(data.list[i]);
+				}
+
+			});
+		}
+
+		loadWeatherData();
+	})();
+	</script>
+</body>
+</html>
