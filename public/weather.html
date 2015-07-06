@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="weather forcasting">
+    <meta name="description" content="weather forecasting">
     <meta name="author" content="Tarek S Hafez">
 	<title>Weather API Example</title>
 	<link rel="stylesheet" href="/css/bootstrap.css">
@@ -12,6 +12,12 @@
 	#map-canvas {
 		width: 100%;
 		height: 500px;
+  	}
+  	body {
+  		background-color: skyblue;
+  	}
+  	.panel {
+  		background-color: beige;
   	}
   	</style>
 </head>
@@ -42,8 +48,8 @@
 	<script type="text/javascript">
 	"use strict";
 	navigator.geolocation.getCurrentPosition(function(position){
-    		//MAKES AJEX REQUEST FOR LAT AND LONG
-		var openWeatherRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&cnt=5", {
+
+		var openWeatherRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&cnt=3", {
 			    APPID: "d1ab172daa752ce8322b5e76f33063f5",
 				units: "imperial"
 		});
@@ -75,19 +81,21 @@
 	var postWeatherData = function (object) {
 		var day = moment.unix(object.dt);
 		
-		var populateForecast = "<section class='col-md-2'>" + "<p>Date: "
-							 + day.format("ddd") + "</p> <p>Max Temp: " 
-							 + object.temp.max + "</p> <p>Min Temp: "
-							 + object.temp.min + "</p> <p>Expected Conditions: "
+		var populateForecast = "<div class='panel panel-default col-md-4'>" 
+							 + "<div class='panel-heading'> <h3 class='panel-title'>" 
+							 + "Date: " + day.format("ddd") + "</h3>" 
+							 +  "</div> <div class='panel-body'>" + "<p>High/Low: " 
+							 + object.temp.max + "/" + object.temp.min 
+							 + "</p> <p>Expected Conditions: "
 							 + object.weather[0].main + "</p> <p> Humidity: "
 							 + object.humidity + "</p> <p>Wind Speed: "
-							 + object.speed + "</p></section>";
+							 + object.speed + "</p></div>";
 
 		$(".row").append(populateForecast);
 	}
 
 	function loadWeatherData (latitude, longitude) {
-		var openWeatherRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + latitude + "&lon=" + longitude + "&cnt=5", {
+		var openWeatherRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + latitude + "&lon=" + longitude + "&cnt=3", {
 			APPID: "d1ab172daa752ce8322b5e76f33063f5",
 			units: "imperial"
 		});
