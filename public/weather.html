@@ -8,71 +8,163 @@
     <meta name="author" content="Tarek S Hafez">
 	<title>Weather API Example</title>
 	<link rel="stylesheet" href="/css/bootstrap.css">
+	<style type="text/css">
+	#map-canvas {
+		width: 100%;
+		height: 480px;
+  	}
+  	</style>
 </head>
 <body>
 	<div class="container">
 		<h1>Weather Application</h1>
 		<div class="row">
-			<h3>Austin, Tx</h3>
+			<h3 id="cityName"></h3>
 		</div>
+		<div id="map-canvas"></div>
+		<form method="post" id="mapInput">
+			<div class="col-lg-12">
+		    	<div class="input-group">
+			      	<input id="idLong" type="text" class="form-control" placeholder="Search for place..." name="address">
+			      	<span class="input-group-btn">
+				        <button class="btn btn-default" type="submit">Submit</button>
+			      	</span>
+		    	</div>
+			</div>
+		</form>
 	</div>
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="/js/moment.js"></script>
-	<script type="text/javascript">
-	(function () {
-		"use strict";
 
-		var ajaxRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily", {
+	<script src="/js/jquery.js"></script>
+	<script src="/js/moment.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANQEK6nmErpxkqSDcRMxJ62PfiOsD7tZk">
+    </script>
+	<script type="text/javascript">
+	"use strict";
+	 navigator.geolocation.getCurrentPosition(function(position){
+    		//MAKES AJEX REQUEST FOR LAT AND LONG
+		var openWeatherRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&cnt=5", {
+			    APPID: "d1ab172daa752ce8322b5e76f33063f5",
+				units: "imperial"
+		});
+
+		openWeatherRequest.always(function () {
+			console.log("request sent");
+		});
+
+		openWeatherRequest.fail(function (data, error) {
+			console.log(error);
+			console.log(openWeatherRequest.status);
+		});
+
+		openWeatherRequest.done(function (data) {
+			var cityName = data.city.name;
+
+			$("#cityName").append(cityName);
+
+			for (var i = 0; i < data.list.length; i++) {
+				postWeatherData(data.list[i]);
+			}
+
+			mapCanvasBuild(position.coords.latitude, position.coords.longitude, cityName);
+
+			console.log('done');
+		});
+	});
+	
+	var postWeatherData = function (object) {
+		var day = moment.unix(object.dt);
+
+		var populateForecast = "<div class='col-md-2'>" + "<p>Date: "
+							 + day.format("ddd") + "</p> <p>Max Temp: " 
+							 + object.temp.max + "</p> <p>Min Temp: "
+							 + object.temp.min + "</p> <p>Expected Conditions: "
+							 + object.weather[0].main + "</p> <p>Rain: "
+							 + object.rain + "</p> <p> Humidity: "
+							 + object.humidity + "</p> <p>Pressure: "
+							 + object.pressure + "</p> <p>Wind Speed: "
+							 + object.speed + "</p></div>";
+
+		$(".row").append(populateForecast);
+	}
+
+	function loadWeatherData (latitude, longitude) {
+		var openWeatherRequest = $.get("http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + latitude + "&lon=" + longitude + "&cnt=5", {
 			APPID: "d1ab172daa752ce8322b5e76f33063f5",
-			q:     "Austin, Tx",
 			units: "imperial"
 		});
 
-		var postWeatherData = function (object) {
-			console.log(object.dt)
-			console.log(moment(object.dt));
-			console.log(moment.unix(object.dt));
+		openWeatherRequest.always(function () {
+			console.log("request sent");
+		});
 
-			var day = moment.unix(object.dt);
+		openWeatherRequest.fail(function (data, error) {
+			console.log(error);
+			console.log(openWeatherRequest.status);
+		});
 
-			var populateForecast = "<div class='col-md-2'>" + "<p>Date: "
-								 + day.format("ddd") + "</p> <p>Max Temp: " 
-								 + object.temp.max + "</p> <p>Min Temp: "
-								 + object.temp.min + "</p> <p>Expected Conditions: "
-								 + object.weather[0].main + "</p> <p>Rain: "
-								 + object.rain + "</p> <p> Humidity: "
-								 + object.humidity + "</p> <p>Pressure: "
-								 + object.pressure + "</p> <p>Wind Speed: "
-								 + object.speed + "</p></div>";
+		openWeatherRequest.done(function (data) {
+			var cityName = data.city.name;
 
-			$(".row").append(populateForecast);
+			$("#cityName").append(cityName);
+			
+			for (var i = 0; i < data.list.length; i++) {
+				postWeatherData(data.list[i]);
+			}
+			
+			mapCanvasBuild(latitude, longitude, cityName);
+			
+			console.log('done');
+		});
+	}
+
+	function mapCanvasBuild (latitude, longitude, cityName){
+		var latLng = new google.maps.LatLng(latitude,longitude);
 		
+		var mapOptions = {
+			zoom: 15,
+			center: latLng,
+			animation: google.maps.Animation.DROP,
+		};
 
-		}
+		var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-		function loadWeatherData () {
+	    var marker = new google.maps.Marker({
+		  position: latLng,
+		  map: map,
+		  draggable: true,
+		  title: cityName
+	    });
 
-			ajaxRequest.always(function () {
-				console.log("request sent");
-			});
+		google.maps.event.addListener(marker, 'dragend', function () {
+			var latLng = marker.getPosition();
+			var latitude = latLng.lat();
+			var longitude = latLng.lng();
+		    loadWeatherData (latitude, longitude);
+		});
 
-			ajaxRequest.fail(function (data, error) {
-				console.log(error);
-				console.log(ajaxRequest.status);
-			});
+	}
 
-			ajaxRequest.done(function (data) {
-				// console.log(data);
-				console.log(data);
-				for (var i = 0; i < data.list.length; i++) {
-					postWeatherData(data.list[i]);
-				}
+	$('#mapInput').on('submit',function (e) {
+        e.preventDefault();
+    	var inputObject = $('form').serializeArray();
+        var address = inputObject 	[0].value;
+		var geocoder = new google.maps.Geocoder();
+		
+		geocoder.geocode( { 'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+			    
+			    var latitude = results[0].geometry.location.lat();
+			    var longitude = results[0].geometry.location.lng();
 
-			});
-		}
+			    loadWeatherData(latitude,longitude);
+			    mapCanvasBuild(latitude,longitude);
 
-		loadWeatherData();
-	})();
+			} else {
+				alert("Geocoding was not successful - STATUS: " + status);
+			}
+		});
+	});
+
 	</script>
 </body>
 </html>
