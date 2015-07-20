@@ -1,6 +1,6 @@
 <?php
 	$adjectives = ['Furious', 'Tempestuous', 'Righteous', 'Virtuous', 'Subtle', 'Brobdingnagian', 'Heretical', 'Cosmic', 'Torturous', 'Treacherous'];
-	$nouns = ['Penguin', 'Sandwich', 'Duck', 'Yogurt', 'Stick', 'Ibiz', 'Turtle', 'Dinosaur', 'Spoon', 'Sock'];
+	$nouns = ['Penguin', 'Sandwich', 'Duck', 'Yogurt', 'Stick', 'Toilet', 'Turtle', 'Dinosaur', 'Spoon', 'Sock'];
 
 	function randomNumber ($array) {
 		$random = mt_rand(0, 9);
@@ -21,6 +21,6 @@
 </head>
 <body>
 	<h1>Server Name Generator</h1>
-	<h2><?php echo "{$randomAdjectives} {$randomNouns}" ?></h2>
+	<h2><?= "{$randomAdjectives} {$randomNouns}" ?></h2>
 </body>
 </html>

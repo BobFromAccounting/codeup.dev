@@ -12,9 +12,9 @@ $favoriteThings = ['Physics', 'Programming', 'Music', 'Games', 'People Watching'
 <body>
     <h1>These are a few of <small>my favorite things!</small></h1>
     <table class="table table-striped">
-    <?php foreach ($favoriteThings as $favoriteThing) { ?>
-        <tr><td> <?php echo $favoriteThing; ?> </td></tr>
-    <?php } ?>
+        <? foreach ($favoriteThings as $favoriteThing): ?>
+            <tr><td> <?= $favoriteThing; ?> </td></tr>
+        <? endforeach; ?>
     </table>
 </body>
 </html>
