@@ -10,7 +10,7 @@ $favoriteThings = ['Physics', 'Programming', 'Music', 'Games', 'People Watching'
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
-    <h1>My Favorite Things</h1>
+    <h1>These are a few of <small>my favorite things!</small></h1>
     <table class="table table-striped">
     <?php foreach ($favoriteThings as $favoriteThing) { ?>
         <tr><td> <?php echo $favoriteThing; ?> </td></tr>
