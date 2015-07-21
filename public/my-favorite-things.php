@@ -1,6 +1,19 @@
 <?php
 
-$favoriteThings = ['Physics', 'Programming', 'Music', 'Games', 'People Watching'];
+    function pageController()
+    {
+        $favorites = ['Physics', 'Programming', 'Music', 'Games', 'People Watching'];
+        // Initialize an empty data array.
+        $data = [];
+
+        // Add data to be used in the html view.
+        $data['favoriteThings'] = $favorites;
+
+        // Return the completed data array.
+        return $data;    
+    }
+
+    extract(pageController());
 
 ?>
 <!DOCTYPE html>
