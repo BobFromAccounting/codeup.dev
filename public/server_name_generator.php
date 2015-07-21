@@ -12,12 +12,12 @@
     {
     	$randomAdjectives = randomNumber($adjectives);
     	$randomNouns = randomNumber($nouns);
+        
         // Initialize an empty data array.
         $data = [];
 
         // Add data to be used in the html view.
         $data['serverName'] = "{$randomAdjectives} {$randomNouns}";
-
 
         // Return the completed data array.
         return $data;    
