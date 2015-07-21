@@ -3,12 +3,10 @@
 
     if (isset($_GET['counter'])) {    
         $counter = $_GET['counter'];
-        if (!empty($_GET)) {
-            if ($_GET['direction'] == 'up') {
-                    $counter += 1;
-            } else if ($_GET['direction'] == 'down') {
-                    $counter -= 1;
-            }
+        if ($_GET['direction'] == 'up') {
+                $counter += 1;
+        } else if ($_GET['direction'] == 'down') {
+                $counter -= 1;
         }
     } else {
         $counter = 0;

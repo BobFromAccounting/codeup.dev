@@ -1,14 +1,11 @@
 <?php
     var_dump($_GET);
-
     if (isset($_GET['hit'])){
         $hitCounter = $_GET['hit'];
-        if (!empty($_GET)) {
-            if ($_GET['miss'] == 'no') {
-                $hitCounter += 1;
-            } else if ($_GET['miss'] == 'yes') {
-                $hitCounter = 0;
-            }
+        if ($_GET['miss'] == 'no') {
+            $hitCounter += 1;
+        } else if ($_GET['miss'] == 'yes') {
+            $hitCounter = 0;
         }
     } else {
         $hitCounter = 0;
