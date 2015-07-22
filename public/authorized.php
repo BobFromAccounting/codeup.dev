@@ -1,32 +1,21 @@
 <?php
+session_start();
 
-    function pageController () {
-        $username = isset($_POST['username']) ? $_POST['username'] == 'guest': '';
-        $password = isset($_POST['password']) ? $_POST['password'] == 'password' : '';
-        $data = [];
-
-        if ($username && $password) {
-            $success = "You are authorized to view this material.";
-        } else {
-            $success = "You are not authorized to view this material.";
-        }
-
-        $data['authorized'] = $success;
-        return $data;
-    }
-
-    extract(pageController());
-
+if (!empty($_SESSION['LOGGED_IN_USER'])) {
+    $welcome = $_SESSION['LOGGED_IN_USER'];
+} else {
+    header("Location: login.php");
+    exit();
+}   
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>POST Example</title>
+    <title>Authorization Page</title>
 </head>
 <body>
     <h2>Authorization Status:</h2>
-    <p><?= $authorized; ?></p>
-
-    <a href="login.php">Re-enter Login data.</a>
+    <p>WELCOME, <?= $welcome ?>! You are authorized to view this content!</p>
+    <a href="logout.php">Log Out</a>
 </body>
 </html>
