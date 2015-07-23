@@ -37,15 +37,17 @@
             <? endforeach; ?>
         </ol>
     </div>
-    <form method="POST">
-        <label>Game Title</label>
-        <input type="text" name="title"><br>
-        <label>Game Studio</label>
-        <input type="text" name="studio"><br>
-        <label class="sr-only">Game Description</label>
-        <textarea rows="10" col="90" type="text" name="description" placeholder="Game Description"></textarea><br>
-        <input class="btn btn-primary" type="submit">
-    </form>
-    <a href="reset.php">Reset Array</a>
+    <div class="container">
+        <form method="POST">
+            <label>Game Title</label>
+            <input type="text" name="title" autofocus><br>
+            <label>Game Studio</label>
+            <input type="text" name="studio"><br>
+            <label class="sr-only">Game Description</label>
+            <textarea rows="10" col="90" type="text" name="description" placeholder="Game Description"></textarea><br>
+            <input class="btn btn-primary" type="submit">
+        </form>
+        <a href="reset.php">Reset Array</a>
+    </div>
 </body>
 </html>
