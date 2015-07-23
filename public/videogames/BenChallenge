@@ -1,0 +1,36 @@
+
+
+I’ve written out some quick and simple spec intended to test our use of GET, POST, and sessions. (Note: My instructions use movies, but to be honest you can use whatever information you’d like to keep track of like this, such as albums, books, recipes, video games, etc. It should really be up to you, just make it a relatively straight forward set of data that you find interesting).
+
+Movies
+======
+
+You will create a simple 2 to 3 page app for storing movie titles and descriptions. Create a new directory in codeup.dev/public called "movies" and add the following files to it:
+
+1. index.php
+    This file should include:
+    - A list of all the movie titles the users have inputted (when you first begin, this list will be empty)
+    - A form to enter a new movie title and description
+    When the user enters a new movie, it should be added to an array called 'movies' in the $_SESSION array. This array should be in the form of:
+    $_SESSION['movies'] = array(
+        array(
+            'title' => '...',
+            'description' => '...'
+        ),
+        array(
+            'title' => '...',
+            'description' => '...'
+        ),
+        ...
+    )
+    Each movie title should be a link to show.php with the index of the movie passed in the query string
+2. show.php
+    This file should display the movie's title and its description.
+    If the user has not included the index of the movie in the request (or the index is not valid), redirect them back to index.php.
+
+Bonus
+-----
+
+1. Add the ability to remove a given movie from the array. Because this is modifying data, it should be done as a POST request, and not get. You can do this with either a repeated form for each move, or a single form tied together with some JavaScript
+2. Save the movie data to a file. The file should ONLY be read if the 'movies' array in the session is empty. It should ONLY be written if the user has added or removed a movie.
+3. Include additional information about each movie, such as the year it was release, MPAA rating, Rotten Tomatoes score, etc. If you are writing this data out to a file, look at how to handle it as a CSV, rather than a flat file.

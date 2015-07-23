@@ -1,12 +1,12 @@
 <?php
-session_start();
+    session_start();
 
-if (!empty($_SESSION['LOGGED_IN_USER'])) {
-    $welcome = $_SESSION['LOGGED_IN_USER'];
-} else {
-    header("Location: login.php");
-    exit();
-}   
+    if (!empty($_SESSION['LOGGED_IN_USER'])) {
+        $welcome = $_SESSION['LOGGED_IN_USER'];
+    } else {
+        header("Location: login.php");
+        exit();
+    }   
 ?>
 <!DOCTYPE html>
 <html>

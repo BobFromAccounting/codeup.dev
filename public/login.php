@@ -1,26 +1,21 @@
 <?php
-// start the session (or resume an existing one)
-// this function must be called before trying to set of get any session data!
-session_start();
+    session_start();
 
-$username = isset($_POST['username']) && htmlspecialchars(strip_tags($_POST['username'] == 'guest'));
-$password = isset($_POST['password']) && htmlspecialchars(strip_tags($_POST['password'] == 'password'));
+    $username = isset($_POST['username']) && htmlspecialchars(strip_tags($_POST['username'] == 'guest'));
+    $password = isset($_POST['password']) && htmlspecialchars(strip_tags($_POST['password'] == 'password'));
 
-$LOGGED_IN_USER = false;
+    $LOGGED_IN_USER = false;
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    if ($username && $password) {
-        $_SESSION['LOGGED_IN_USER'] = $_POST['username'];
-        header("Location: authorized.php");
-        exit();
-    } else {
-        echo "Please enter valid credentials.";
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        if ($username && $password) {
+            $_SESSION['LOGGED_IN_USER'] = $_POST['username'];
+            header("Location: authorized.php");
+            exit();
+        } else {
+            echo "Please enter valid credentials.";
+        }
+        
     }
-    
-}
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
