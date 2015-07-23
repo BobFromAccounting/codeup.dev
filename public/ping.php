@@ -1,15 +1,17 @@
 <?php
+require 'functions.php';
     
 function pageController () {
+
     var_dump($_GET);
 
     $data = [];
 
-    if (isset($_GET['hit'])){
+    if (inputHas('hit')){
         $hitCounter = $_GET['hit'];
-        if ($_GET['miss'] == 'no') {
+        if (inputGet('miss') === 'no') {
             $hitCounter += 1;
-        } else if ($_GET['miss'] == 'yes') {
+        } else if (inputGet('miss') === 'yes') {
             $hitCounter = 0;
         }
     } else {

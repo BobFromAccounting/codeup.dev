@@ -1,21 +1,20 @@
 <?php
     session_start();
+    require 'functions.php';
 
-    $username = isset($_POST['username']) && htmlspecialchars(strip_tags($_POST['username'] == 'guest'));
-    $password = isset($_POST['password']) && htmlspecialchars(strip_tags($_POST['password'] == 'password'));
+    $username = inputHas('username') && escape($_REQUEST['username'] == 'guest');
+    $password = inputHas('password') && escape($_REQUEST['password'] == 'password');
 
     $LOGGED_IN_USER = false;
 
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        if ($username && $password) {
-            $_SESSION['LOGGED_IN_USER'] = $_POST['username'];
-            header("Location: authorized.php");
-            exit();
-        } else {
-            echo "Please enter valid credentials.";
-        }
-        
+    if ($username && $password) {
+        $_SESSION['LOGGED_IN_USER'] = $_POST['username'];
+        header("Location: authorized.php");
+        exit();
+    } else {
+        echo "Please enter valid credentials.";
     }
+        
 ?>
 <!DOCTYPE html>
 <html>
