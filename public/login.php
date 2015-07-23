@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require 'functions.php';
+    require '../functions.php';
 
     $username = inputHas('username') && escape($_REQUEST['username'] == 'guest');
     $password = inputHas('password') && escape($_REQUEST['password'] == 'password');

@@ -1,5 +1,5 @@
 <?php  
-require 'functions.php';
+require '../functions.php';
 
 function pageController () {
     var_dump($_GET);
