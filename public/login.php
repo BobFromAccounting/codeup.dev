@@ -1,18 +1,19 @@
 <?php
     session_start();
     require '../functions.php';
+    require_once '../Auth.php';
+    require_once '../Input.php';
 
-    $username = inputHas('username') && escape($_REQUEST['username'] == 'guest');
-    $password = inputHas('password') && escape($_REQUEST['password'] == 'password');
-
-    $LOGGED_IN_USER = false;
-
-    if ($username && $password) {
-        $_SESSION['LOGGED_IN_USER'] = $_POST['username'];
-        header("Location: authorized.php");
-        exit();
-    } else {
-        echo "Please enter valid credentials.";
+    if ($_POST) {
+        if (Auth::attempt(Input::get("username"), Input::get('password')))
+        {
+            echo "Test";
+            header("Location: authorized.php");
+            exit();
+        } else
+        {
+            echo "Please enter valid credentials.";
+        }
     }
         
 ?>

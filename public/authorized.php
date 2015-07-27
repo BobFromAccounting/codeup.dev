@@ -1,9 +1,11 @@
 <?php
     session_start();
     require '../functions.php';
+    require_once '../Auth.php';
+    require_once '../Input.php';
 
-    if (!empty($_SESSION['LOGGED_IN_USER'])) {
-        $welcome = escape($_SESSION['LOGGED_IN_USER']);
+    if (Auth::check()) {
+        $username = Auth::user();
     } else {
         header("Location: login.php");
         exit();
@@ -16,7 +18,7 @@
 </head>
 <body>
     <h2>Authorization Status:</h2>
-    <p>WELCOME, <?= $welcome ?>! You are authorized to view this content!</p>
+    <p>WELCOME, <?= $username ?>! You are authorized to view this content!</p>
     <a href="logout.php">Log Out</a>
 </body>
 </html>
