@@ -1,8 +1,6 @@
 <?php
     session_start();
-    require '../functions.php';
     require_once '../Auth.php';
-    require_once '../Input.php';
 
     if (Auth::check()) {
         $username = Auth::user();
