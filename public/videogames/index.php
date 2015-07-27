@@ -30,7 +30,7 @@
     <div class="container">
         <h1>Video Games</h1>
         <ol>
-            <? foreach ($gamesArray as $key => $videoGame): ?>
+            <? foreach ($_SESSION['gamesArray'] as $key => $videoGame): ?>
             <li>
                 <a href="/videogames/show.php?index=<?= $key ?>"><?= $videoGame['title'] ?></a>
             </li>
@@ -39,12 +39,12 @@
     </div>
     <div class="container">
         <form method="POST">
-            <label>Game Title</label>
-            <input type="text" name="title" autofocus><br>
-            <label>Game Studio</label>
-            <input type="text" name="studio"><br>
-            <label class="sr-only">Game Description</label>
-            <textarea rows="10" col="90" type="text" name="description" placeholder="Game Description"></textarea><br>
+            <label for="title">Game Title</label>
+            <input type="text" name="title" id="title" autofocus><br>
+            <label for"studio">Game Studio</label>
+            <input type="text" name="studio" id="studio"><br>
+            <label for="description" class="sr-only">Game Description</label>
+            <textarea rows="10" col="90" type="text" name="description" id="description" placeholder="Game Description"></textarea><br>
             <input class="btn btn-primary" type="submit">
         </form>
         <a href="reset.php">Reset Array</a>
