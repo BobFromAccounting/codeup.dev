@@ -19,7 +19,7 @@ class Auth
         } else 
         {
             $unsuccessful = new Log;
-            $unsuccessful->logInfo("Username: {$username} and/or password not found! Please try again.");
+            $unsuccessful->logWarning("Username: {$username} and/or password not found! Please try again.");
             return false;
         }
     }
@@ -51,5 +51,5 @@ class Auth
         header("Location: login.php");
         exit();
     }
-
 }
+?>
