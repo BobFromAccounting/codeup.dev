@@ -9,24 +9,23 @@ class Auth
 
     public static function attempt ($username, $password)
     {
+        $log = new Log;
         if ($username === 'guest' && password_verify($password, self::$password))
         {
             $_SESSION['LOGGED_IN_USER'] = $username;
-            $success = new Log;
-            $success->logInfo("User {$username} is logged in.");
+            $log->logInfo("User {$username} is logged in.");
             return true;
 
         } else 
         {
-            $unsuccessful = new Log;
-            $unsuccessful->logWarning("Username: {$username} and/or password not found! Please try again.");
+            $log->logWarning("Username: {$username} and/or password not found! Please try again.");
             return false;
         }
     }
 
     public static function check ()
     {
-        return isset($_SESSION['LOGGED_IN_USER']) ? true : false;
+        return isset($_SESSION['LOGGED_IN_USER']);
     }
 
     public static function user ()
@@ -47,9 +46,6 @@ class Auth
         }
 
         session_destroy();
-
-        header("Location: login.php");
-        exit();
     }
 }
 ?>

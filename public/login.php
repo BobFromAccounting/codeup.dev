@@ -4,6 +4,12 @@
     require_once '../Auth.php';
     require_once '../Input.php';
 
+    if (Auth::check())
+    {
+        header("Location: authorized.php");
+        exit();  
+    }
+
     if ($_POST)
     {
         if (Auth::attempt(escape(Input::get("username")), escape(Input::get('password'))))
