@@ -6,9 +6,9 @@
 
     require_once 'db_connect.php';
 
-    $truncate = "TRUNCATE national_parks";
+    $truncateSql = "TRUNCATE national_parks";
 
-    $dbc->exec($truncate);
+    $dbc->exec($truncateSql);
 
     $parks = [
     ['name' => 'Acadia', 'location' => 'Maine', 'date_established' => '1919/02/26', 'area_in_acres' => 47389.67],
@@ -24,9 +24,7 @@
     ];
 
     foreach ($parks as $details => $park) {
-        $query = "INSERT INTO national_parks (name, location, date_established, area_in_acres) VALUES ('{$park['name']}', '{$park['location']}', '{$park['date_established']}', '{$park['area_in_acres']}')";
-
-        $dbc->exec($query);
-
+        $insertSql = "INSERT INTO national_parks (name, location, date_established, area_in_acres) VALUES ('{$park['name']}', '{$park['location']}', '{$park['date_established']}', '{$park['area_in_acres']}')";
+        $dbc->exec($insertSql);
         echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
     }
