@@ -25,6 +25,6 @@
 
     foreach ($parks as $details => $park) {
         $insertSql = "INSERT INTO national_parks (name, location, date_established, area_in_acres) VALUES ('{$park['name']}', '{$park['location']}', '{$park['date_established']}', '{$park['area_in_acres']}')";
-        $dbc->exec($insertSql);
-        echo "Inserted ID: " . $dbc->lastInsertId() . PHP_EOL;
+        $numRow->exec($insertSql);
+        echo "Inserted ID: " . $numRow->lastInsertId() . PHP_EOL;
     }
