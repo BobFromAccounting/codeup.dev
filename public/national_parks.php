@@ -10,7 +10,6 @@ require_once 'national_parks_procedural.php';
 <body>
     <div class="container">
         <h1>National Parks Data</h1>
-    
         <? foreach ($parks as $key => $park): ?>
             <h2> <?= $park['name'] ?> <small><strong> <?= $park['location']; ?> </strong></small></h2>
             <p> 
@@ -18,25 +17,20 @@ require_once 'national_parks_procedural.php';
                 <u>Area in acres: <?= $park['area_in_acres']; ?></u> <br> 
                 <?= $park['description']; ?>
             </p>
-
         <? endforeach; ?>
         <? if ($page != 1): ?>
             <a style="float: left" class='btn btn-primary' href="?page=<?= $page - 1; ?>">Previous</a>
         <? endif; ?>
-
         <? if ($page < $totalPages): ?>
             <a style="float: right" class='btn btn-primary' href="?page=<?= $page + 1; ?>">NEXT</a>
         <? endif; ?>
-
         <div class="container text-center">
             <? for ($i = 1; $i <= $totalPages; $i += 1) { ?>
             <a class='btn btn-primary' href="?page=<?= $i ?>"><?= $i ?></a>
             <? } ?>
         </div>
-
         <br>
         <br>
-
         <div class="container">
             <form method="POST">
                 <div class="form-group">

@@ -35,9 +35,10 @@
     $stmt->execute();
     $parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!empty($_POST)) {
-        if (Input::has($name) && Input::has($location) && Input::has($inputDate) && Input::has($area) && Input::has($description)) {
-
+    if (!empty($_POST))
+    {
+        if (Input::has('name') && Input::has('location') && Input::has('date') && Input::has('area') && Input::has('description'))
+        {
             $name = Input::get('name');
             $location = Input::get('location');
             $inputDate = Input::get('date');
@@ -57,9 +58,9 @@
             $stmt->bindValue(':description', $description, PDO::PARAM_STR);
 
             $stmt->execute();
-
-        } else {
-            header("Location: ?page=$totalPages");
+        } else
+        {
+            header("location: ?page=$totalPages");
             exit();
         }
     }
