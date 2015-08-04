@@ -9,6 +9,7 @@ require_once 'national_parks_procedural.php';
 </head>
 <body>
     <div class="container">
+        <!-- DISPLAY NATIONAL PARKS DATA -->
         <h1>National Parks Data</h1>
         <? foreach ($parks as $key => $park): ?>
             <h2> <?= $park['name'] ?> <small><strong> <?= $park['location']; ?> </strong></small></h2>
@@ -18,6 +19,8 @@ require_once 'national_parks_procedural.php';
                 <?= $park['description']; ?>
             </p>
         <? endforeach; ?>
+        <!-- END OF DATA DISPLAY -->
+        <!-- PAGINATION STARTS -->
         <? if ($page != 1): ?>
             <a style="float: left" class='btn btn-primary' href="?page=<?= $page - 1; ?>">Previous</a>
         <? endif; ?>
@@ -29,9 +32,12 @@ require_once 'national_parks_procedural.php';
             <a class='btn btn-primary' href="?page=<?= $i ?>"><?= $i ?></a>
             <? } ?>
         </div>
+        <!-- PAGINATION ENDS -->
         <br>
         <br>
+        <!-- FORM TO ADD PARK TO DATABASE -->
         <div class="container">
+            <h2><?= $errorMessage; ?></h2>
             <form method="POST">
                 <div class="form-group">
                     <label for="name">Name of National Park</label>
@@ -56,6 +62,7 @@ require_once 'national_parks_procedural.php';
                 <input class="btn btn-primary" type="submit" style="float: right">
             </form>
         </div>
+        <!-- END FORM -->
     </div>
 </body>
 </html>

@@ -3,37 +3,8 @@
     require_once '../include/Input.php';
     require_once '../include/db_connect.php';
 
-    $limit = 4; 
-    $offset = 0;
-    $stmt = $dbc->query('SELECT count(*) FROM national_parks');
-    $totalPages = ceil(($stmt->fetchColumn())/$limit);
-
-    if (!isset($_GET['page']) || !is_numeric($_GET['page']) || $_GET['page'] < 1) 
-    {
-        $_GET['page'] = 1;
-        $page = 1;
-    } else
-    {
-        $offset = ($_GET['page'] - 1) * $limit;
-        $page = $_GET['page']; 
-    }
-
-    if ($_GET['page'] > $totalPages)
-    {
-        header("Location: ?page=$totalPages");
-        exit();
-    }
-    
-    $query = 'SELECT * FROM national_parks LIMIT :limit OFFSET :offset';
-
-    $stmt = $dbc->prepare($query);
-    $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    
-    $stmt->execute();
-    $parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Authenticating Data from Input form in national_parks.php
+    $errorMessage = "Add a Park";
 
     if (!empty($_POST))
     {
@@ -60,8 +31,45 @@
             $stmt->execute();
         } else
         {
-            header("location: ?page=$totalPages");
-            exit();
+            $errorMessage = "To add a park please make sure to complete all fields.";
         }
     }
+    // end of Authentication
+    // start of display and pagination logic
+    $stmt = $dbc->query('SELECT count(*) FROM national_parks');
+    $totalPages = ceil(($stmt->fetchColumn())/$limit);
+
+    if (!isset($_GET['page']) || !is_numeric($_GET['page']) || $_GET['page'] < 1) 
+    {
+        $_GET['page'] = 1;
+        $page = 1;
+    } else
+    {
+        $offset = ($_GET['page'] - 1) * $limit;
+        $page = $_GET['page']; 
+    }
+
+    if ($_GET['page'] > $totalPages)
+    {
+        header("Location: ?page=$totalPages");
+        exit();
+    }
+    
+    $limit = 4; 
+    $offset = 0;
+
+    $query = 'SELECT * FROM national_parks LIMIT :limit OFFSET :offset';
+
+    $stmt = $dbc->prepare($query);
+    $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    
+    $stmt->execute();
+
+    $parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // end of display and pagination logic
+
 ?>
