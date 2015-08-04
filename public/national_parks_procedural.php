@@ -21,7 +21,6 @@
     if ($_GET['page'] > $totalPages)
     {
         header("Location: ?page=$totalPages");
-
     }
     
     $parks = $dbc->query('SELECT * FROM national_parks LIMIT ' . $limit . ' OFFSET ' . $offset)->fetchAll(PDO::FETCH_ASSOC);
