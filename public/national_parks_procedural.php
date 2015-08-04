@@ -36,6 +36,8 @@
     }
     // end of Authentication
     // start of display and pagination logic
+    $limit = 4; 
+    $offset = 0;
     $stmt = $dbc->query('SELECT count(*) FROM national_parks');
     $totalPages = ceil(($stmt->fetchColumn())/$limit);
 
@@ -54,9 +56,6 @@
         header("Location: ?page=$totalPages");
         exit();
     }
-    
-    $limit = 4; 
-    $offset = 0;
 
     $query = 'SELECT * FROM national_parks LIMIT :limit OFFSET :offset';
 
@@ -69,7 +68,5 @@
     $stmt->execute();
 
     $parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     // end of display and pagination logic
-
 ?>
