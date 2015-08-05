@@ -20,12 +20,12 @@
                 $this->filename = "log/" . trim($prefix) . "-" . date('Y-m-d') . '.log';
             } else
             {
-                die();
+                die('To write to a file, please ensure prefix is input as a string');
             }
 
             if (!touch($this->filename) && !is_writable($this->filename))
             {
-                die();
+                die('To write to a file, please ensure prefix is input as a string');
             }
         }
 
