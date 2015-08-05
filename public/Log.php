@@ -1,40 +1,69 @@
 <?php
-class Log
-{
-    public $filename;
-    public $handle;
 
-    public function __construct ($prefix = 'log')
-    {
-        $this->filename = "log/{$prefix}-" . date('Y-m-d') . '.log';
-        $this->handle = fopen($this->filename, 'a');
-    }
+    require_once '../include/Input.php';
 
-    public function logMessage ($logLevel, $message)
+    class Log
     {
-        $logSpecificTime =  date("Y-m-d H:i:s");
-        $stringToWrite =  "{$logSpecificTime} [{$logLevel}] {$message}";
-        fwrite($this->handle, PHP_EOL . $stringToWrite);
-    }
+        private $filename;
+        private $handle;
 
-    public function logInfo ($message)
-    {
-        return $this->logMessage('INFO', $message);
-    }
+        public function __construct ($prefix = 'log')
+        {
+            // $this->filename = "log/{$prefix}-" . date('Y-m-d') . '.log';
+            $this->setFilename($prefix);
+            $this->handle = fopen($this->getFilename(), 'a');
+        }
 
-    public function logError ($message)
-    {
-        return $this->logMessage('ERROR', $message);
-    }
+        protected function setFilename($prefix)
+        {
+            if (is_string($prefix))
+            {
+                $this->filename = "log/" . trim($prefix) . "-" . date('Y-m-d') . '.log';
+            } else
+            {
+                die();
+            }
 
-    public function logWarning ($message)
-    {
-        return $this->logMessage('WARNING', $message);
-    }
+            if (!touch($this->filename) && !is_writable($this->filename))
+            {
+                die();
+            }
+        }
 
-    public function __destruct ()
-    {
-        fclose($this->handle);
+        public function getFilename()
+        {
+            return $this->filename;
+        }
+
+
+        public function logMessage ($logLevel, $message)
+        {
+            $logSpecificTime =  date("Y-m-d H:i:s");
+            $stringToWrite =  "{$logSpecificTime} [{$logLevel}] {$message}";
+            fwrite($this->handle, PHP_EOL . $stringToWrite);
+        }
+
+        public function logInfo ($message)
+        {
+            return $this->logMessage('INFO', $message);
+        }
+
+        public function logError ($message)
+        {
+            return $this->logMessage('ERROR', $message);
+        }
+
+        public function logWarning ($message)
+        {
+            return $this->logMessage('WARNING', $message);
+        }
+
+        public function __destruct ()
+        {
+            if (isset($this->handle))
+            {
+                fclose($this->handle);
+            }
+        }
     }
-}
 ?>

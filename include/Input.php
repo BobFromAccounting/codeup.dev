@@ -33,7 +33,8 @@ class Input
         }
     }
 
-    public static function escape ($input) {
+    public static function escape ($input)
+    {
         return htmlspecialchars(strip_tags($input));
     }
     ///////////////////////////////////////////////////////////////////////////

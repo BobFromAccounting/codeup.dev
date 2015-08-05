@@ -11,26 +11,26 @@ require_once 'national_parks_procedural.php';
     <div class="container">
         <!-- DISPLAY NATIONAL PARKS DATA -->
         <h1>National Parks Data</h1>
-        <? foreach ($parks as $key => $park): ?>
+        <?php foreach ($parks as $key => $park): ?>
             <h2> <?= $park['name'] ?> <small><strong> <?= $park['location']; ?> </strong></small></h2>
             <p> 
                 <em>Date of establishment: <?= $park['date_established']; ?> </em> <br>
                 <u>Area in acres: <?= $park['area_in_acres']; ?></u> <br> 
                 <?= $park['description']; ?>
             </p>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         <!-- END OF DATA DISPLAY -->
         <!-- PAGINATION STARTS -->
-        <? if ($page != 1): ?>
+        <?php if ($page != 1): ?>
             <a style="float: left" class='btn btn-primary' href="?page=<?= $page - 1; ?>">Previous</a>
-        <? endif; ?>
-        <? if ($page < $totalPages): ?>
+        <?php endif; ?>
+        <?php if ($page < $totalPages): ?>
             <a style="float: right" class='btn btn-primary' href="?page=<?= $page + 1; ?>">NEXT</a>
-        <? endif; ?>
+        <?php endif; ?>
         <div class="container text-center">
-            <? for ($i = 1; $i <= $totalPages; $i += 1) { ?>
+            <?php for ($i = 1; $i <= $totalPages; $i += 1) { ?>
             <a class='btn btn-primary' href="?page=<?= $i ?>"><?= $i ?></a>
-            <? } ?>
+            <?php } ?>
         </div>
         <!-- PAGINATION ENDS -->
         <br>

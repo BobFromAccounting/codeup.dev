@@ -8,8 +8,12 @@
 
     if (!empty($_POST))
     {
-        if (Input::has('name') && Input::has('location') && Input::has('date') && Input::has('area') && Input::has('description'))
-        {
+        if (Input::has('name') &&
+            Input::has('location') &&
+            Input::has('date') &&
+            Input::has('area') &&
+            Input::has('description')
+        ){
             $name = Input::get('name');
             $location = Input::get('location');
             $inputDate = Input::get('date');
@@ -34,15 +38,17 @@
             $errorMessage = "To add a park please make sure to complete all fields.";
         }
     }
-    // end of Authentication
+    // end of Authentication and post to DB
     // start of display and pagination logic
     $limit = 4; 
     $offset = 0;
     $stmt = $dbc->query('SELECT count(*) FROM national_parks');
     $totalPages = ceil(($stmt->fetchColumn())/$limit);
 
-    if (!isset($_GET['page']) || !is_numeric($_GET['page']) || $_GET['page'] < 1) 
-    {
+    if (!isset($_GET['page']) ||
+        !is_numeric($_GET['page']) ||
+        $_GET['page'] < 1
+    ){
         $_GET['page'] = 1;
         $page = 1;
     } else
