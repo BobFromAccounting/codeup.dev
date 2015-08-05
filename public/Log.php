@@ -9,7 +9,6 @@
 
         public function __construct ($prefix = 'log')
         {
-            // $this->filename = "log/{$prefix}-" . date('Y-m-d') . '.log';
             $this->setFilename($prefix);
             $this->handle = fopen($this->getFilename(), 'a');
         }
