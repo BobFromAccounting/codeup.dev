@@ -4,39 +4,57 @@
     require_once '../include/db_connect.php';
 
     // Authenticating Data from Input form in national_parks.php
-    $errorMessage = "Add a Park";
+    $errors = array();
 
     if (!empty($_POST))
     {
-        if (Input::has('name') &&
-            Input::has('location') &&
-            Input::has('date') &&
-            Input::has('area') &&
-            Input::has('description')
-        ){
-            $name = Input::get('name');
-            $location = Input::get('location');
-            $inputDate = Input::get('date');
-            $area = Input::get('area');
-            $description = Input::get('description');
+            try {
+                $name = Input::getString('name');
+            } catch (Exception $e) {
+                $errors[] = $e->getMessage();
+            }
 
-            $formatDate = date("Y-m-d", strtotime($inputDate));
+            try {
+                $location = Input::getString('location');
+            } catch (Exception $e) {
+                $errors[] = $e->getMessage();
+            }
 
-            $insertQuery = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) VALUES (:name, :location, :date, :area, :description)";
+            try {
+                $inputDate = Input::getDate('date');
+            } catch (Exception $e) {
+                $errors[] = $e->getMessage();
+            }
 
-            $stmt = $dbc->prepare($insertQuery);
+            try {
+                $area = Input::getNumber('area');
+            } catch (Exception $e) {
+                $errors[] = $e->getMessage();
+            }
 
-            $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-            $stmt->bindValue(':location', $location, PDO::PARAM_STR);
-            $stmt->bindValue(':date', $formatDate, PDO::PARAM_STR);
-            $stmt->bindValue(':area', $area, PDO::PARAM_STR);
-            $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+            try {
+                $description = Input::getString('description');                
+            } catch (Exception $e) {
+                $errors[] = $e->getMessage();
+            }
 
-            $stmt->execute();
-        } else
-        {
-            $errorMessage = "To add a park please make sure to complete all fields.";
-        }
+
+            if (empty($errors)) {
+                $insertQuery = "INSERT INTO national_parks (name, location, date_established, area_in_acres, description) 
+                    VALUES (:name, :location, :date, :area, :description)";
+
+                $stmt = $dbc->prepare($insertQuery);
+
+                $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+                $stmt->bindValue(':location', $location, PDO::PARAM_STR);
+                $stmt->bindValue(':date', $inputDate, PDO::PARAM_STR);
+                $stmt->bindValue(':area', $area, PDO::PARAM_STR);
+                $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+
+                $stmt->execute();
+
+                $_POST = [];
+            }
     }
     // end of Authentication and post to DB
     // start of display and pagination logic
@@ -47,18 +65,15 @@
 
     if (!isset($_GET['page']) ||
         !is_numeric($_GET['page']) ||
-        $_GET['page'] < 1
-    ){
+        $_GET['page'] < 1) {
         $_GET['page'] = 1;
         $page = 1;
-    } else
-    {
+    } else {
         $offset = ($_GET['page'] - 1) * $limit;
         $page = $_GET['page']; 
     }
 
-    if ($_GET['page'] > $totalPages)
-    {
+    if ($_GET['page'] > $totalPages) {
         header("Location: ?page=$totalPages");
         exit();
     }

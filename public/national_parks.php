@@ -6,6 +6,13 @@ require_once 'national_parks_procedural.php';
 <head>
     <title>National Parks</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <style type="text/css">
+    .error {
+        background-color: yellow;
+        color: salmon;
+    }
+
+    </style>
 </head>
 <body>
     <div class="container">
@@ -37,27 +44,30 @@ require_once 'national_parks_procedural.php';
         <br>
         <!-- FORM TO ADD PARK TO DATABASE -->
         <div class="container">
-            <h2><?= $errorMessage; ?></h2>
+            <?php foreach ($errors as $error): ?>
+                <p class="error"><?= $error . PHP_EOL ;?></p>
+            <?php endforeach; ?>
+
             <form method="POST">
                 <div class="form-group">
                     <label for="name">Name of National Park</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+                    <input value="<?= Input::get('name') ?>" type="text" class="form-control" name="name" id="name" placeholder="Enter Name" require=' '>
                 </div>
                 <div class="form-group">
                     <label for="location">Location of Park</label>
-                    <input type="text" class="form-control" name="location" id="location" placeholder="Please enter full name of state">
+                    <input value="<?= Input::get('location') ?>" type="text" class="form-control" name="location" id="location" placeholder="Please enter full name of state" require=' '>
                 </div>
                  <div class="form-group">
                     <label for="date">Date of Establishment</label>
-                    <input type="date" class="form-control" name="date" id="date" placeholder="Please enter yyyy-mm-dd">
+                    <input value="<?= Input::get('date') ?>" type="text" class="form-control" name="date" id="date" placeholder="Please enter mm/dd/yyyy" require=' '>
                 </div>
                  <div class="form-group">
                     <label for="area">Area in Acres</label>
-                    <input type="text" class="form-control" name="area" id="area" placeholder="Enter area of park in acres.">
+                    <input value="<?= Input::get('area') ?>" type="text" class="form-control" name="area" id="area" placeholder="Enter area of park in acres." require=' '>
                 </div>
                  <div class="form-group">
                     <label for="description">Description of Park</label>
-                    <textarea class="form-control" rows="3" name="description" id="description" placeholder="Description of Park"></textarea>
+                    <textarea class="form-control" rows="3" name="description" id="description" placeholder="Description of Park" require=' '><?= Input::get('description') ?></textarea>
                 </div>
                 <input class="btn btn-primary" type="submit" style="float: right">
             </form>
