@@ -9,13 +9,13 @@
     if (!empty($_POST))
     {
             try {
-                $name = Input::getString('name');
+                $name = Input::getString('name', 1, 255);
             } catch (Exception $e) {
                 $errors[] = $e->getMessage();
             }
 
             try {
-                $location = Input::getString('location');
+                $location = Input::getString('location', 1, 255);
             } catch (Exception $e) {
                 $errors[] = $e->getMessage();
             }
@@ -27,13 +27,13 @@
             }
 
             try {
-                $area = Input::getNumber('area');
+                $area = Input::getNumber('area', 0, 10000000);
             } catch (Exception $e) {
                 $errors[] = $e->getMessage();
             }
 
             try {
-                $description = Input::getString('description');                
+                $description = Input::getString('description', 1, 1500);                
             } catch (Exception $e) {
                 $errors[] = $e->getMessage();
             }
