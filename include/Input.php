@@ -38,34 +38,61 @@ class Input
         return htmlspecialchars(strip_tags($input));
     }
 
-    public static function getString($key)
+    public static function getString($key, $min = 1, $max = 255)
     {
         $value = trim(static::get($key));
 
-        $isString = settype($value, 'string');
+        if (!is_string($key)) {
+            throw new InvalidArgumentException("$key must be a string");
+        }
+
+        if (!is_numeric($min) ||
+            !is_numeric($max)) {
+            throw new InvalidArgumentException('$min and $max must be numbers');
+        }
 
         if (!isset($value)) {
-            throw new Exception("$key cannot be null.");
+            throw new OutOfRangeException("$key cannot be null");
         }
 
         if (!is_string($value)) {
-            throw new Exception("$key must be a string.");
+            throw new DomainException("$key must be a string");
+        }
+
+        if (strlen(static::get($key)) < $min ||
+            strlen(static::get($key)) > $max) {
+
+            throw new LengthException('Entry cannot be left blank, nor exceed character limit');
         }
 
         return $value;
 
     }
 
-    public static function getNumber($key)
+    public static function getNumber($key, $min = 0, $max = 1000000)
     {
         $value = str_replace(',', '', static::get($key));
 
+        if (!is_string($key)) {
+            throw new InvalidArgumentException("$key must be a string");
+        }
+
+        if (!is_numeric($min) ||
+            !is_numeric($max)) {
+            throw new InvalidArgumentException('$min and $max must be numbers');
+        }
+
         if (!isset($value)) {
-            throw new Exception("$key cannot be null.");
+            throw new OutOfRangeException("$key cannot be null");
         }
 
         if (!is_numeric($value)) {
-            throw new Exception("$key must be a number.");
+            throw new DomainException("$key must be a number");
+        }
+
+        if (static::get($key) < $min ||
+            static::get($key) > $max) {
+            throw new RangeException("$key must be a number between $min and $max.");
         }
 
         return $value;

@@ -66,14 +66,18 @@
     if (!isset($_GET['page']) ||
         !is_numeric($_GET['page']) ||
         $_GET['page'] < 1) {
+
         $_GET['page'] = 1;
         $page = 1;
+
     } else {
+
         $offset = ($_GET['page'] - 1) * $limit;
         $page = $_GET['page']; 
     }
 
     if ($_GET['page'] > $totalPages) {
+
         header("Location: ?page=$totalPages");
         exit();
     }
