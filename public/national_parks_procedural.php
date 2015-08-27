@@ -10,13 +10,25 @@
     {
             try {
                 $name = Input::getString('name', 1, 255);
-            } catch (Exception $e) {
+            } catch (InvalidArguementException $e) {
+                $errors[] = $e->getMessage();
+            } catch (OutOfRangeException $e) {
+                $errors[] = $e->getMessage();
+            } catch (DomainException $e) {
+                $errors[] = $e->getMessage();
+            } catch (LengthException $e) {
                 $errors[] = $e->getMessage();
             }
 
             try {
                 $location = Input::getString('location', 1, 255);
-            } catch (Exception $e) {
+            } catch (InvalidArguementException $e) {
+                $errors[] = $e->getMessage();
+            } catch (OutOfRangeException $e) {
+                $errors[] = $e->getMessage();
+            } catch (DomainException $e) {
+                $errors[] = $e->getMessage();
+            } catch (LengthException $e) {
                 $errors[] = $e->getMessage();
             }
 
@@ -28,13 +40,25 @@
 
             try {
                 $area = Input::getNumber('area', 0, 10000000);
-            } catch (Exception $e) {
+            } catch (InvalidArguementException $e) {
+                $errors[] = $e->getMessage();
+            } catch (OutOfRangeException $e) {
+                $errors[] = $e->getMessage();
+            } catch (DomainException $e) {
+                $errors[] = $e->getMessage();
+            } catch (RangeException $e) {
                 $errors[] = $e->getMessage();
             }
 
             try {
-                $description = Input::getString('description', 1, 1500);                
-            } catch (Exception $e) {
+                $description = Input::getString('description', 1, 1500);
+            } catch (InvalidArguementException $e) {
+                $errors[] = $e->getMessage();
+            } catch (OutOfRangeException $e) {
+                $errors[] = $e->getMessage();
+            } catch (DomainException $e) {
+                $errors[] = $e->getMessage();
+            } catch (LengthException $e) {
                 $errors[] = $e->getMessage();
             }
 
