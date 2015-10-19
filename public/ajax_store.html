@@ -20,15 +20,16 @@
         </thead>
         <tbody id="insertProducts"></tbody>
     </table>
-    <a href="#products" id="toolRefresh" class="btn btn-primary btn-lg active" role="button">Refresh Inventory</a>
+    <a id="toolRefresh" class="btn btn-primary btn-lg active" role="button">Refresh Inventory</a>
 </div>
 <script src="/js/jquery.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script>
 "use strict";
 $(document).ready(function () {
-    function populate () {
-        var ajaxRequest = $.get('/data/inventory.json');
+    var ajaxRequest = $.get('/data/inventory.json');
+
+    function populate (request) {
         ajaxRequest.always(function() {
             console.log("Request Sent");
         });
@@ -44,7 +45,10 @@ $(document).ready(function () {
             var populateTable;
             
             data.forEach(function (object, index, array) {
-                populateTable += "<tr>" + "<td>" + object.title + "</td>" + "<td>" + object.quantity + "</td>" + "<td>" + "$ " + object.price + "</td>" + "<td>" + object.categories.join(", ") + "</td>" + "</tr>";
+                populateTable += "<tr><td>" + object.title + "</td>"
+                            + "<td>" + object.quantity + "</td>"
+                            + "<td>" + "$ " + object.price + "</td>"
+                            + "<td>" + object.categories.join(", ") + "</td></tr>";
             });
             $("#insertProducts").html(populateTable);
         });
@@ -52,7 +56,8 @@ $(document).ready(function () {
     
     populate();
 
-    $("#refresh").click(function (e) {
+    $("#toolRefresh").click(function (e) {
+        e.preventDefault();
         populate();
     });
 });
